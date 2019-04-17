@@ -2,16 +2,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
 
-namespace BookLib
+namespace BookLib.Microservice
 {
     public static class BooksLib
     {
         [FunctionName("BooksLib")]
-        public static IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)]HttpRequest req, TraceWriter log)
+        public static IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)]HttpRequest req, ILogger log)
         {
-            log.Info("Request a book based on ISBN13");
+            log.LogInformation("Request a book based on ISBN13");
 
             string isbn = req.Query["isbn"];
 

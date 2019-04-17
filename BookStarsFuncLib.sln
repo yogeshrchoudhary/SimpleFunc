@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.539
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibFunc", "FunctionOne\BookLibFunc.csproj", "{4B7CB836-DD4F-4C4A-BD96-F5FC0657D835}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibFunc.Microservice", "FunctionOne\BookLibFunc.Microservice.csproj", "{4B7CB836-DD4F-4C4A-BD96-F5FC0657D835}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
