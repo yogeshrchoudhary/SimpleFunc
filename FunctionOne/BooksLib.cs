@@ -5,23 +5,30 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using BookLib.Domain.Services;
+using System;
 
 namespace BookLibFunc.Microservice
 {
     public static class BooksLib
     {
-        [FunctionName("BooksLib")]
-        public static IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)]HttpRequest req, ILogger log)
-        {
-            var serviceProvider = Bootstrap.ConfigureServices();
-            log.LogInformation("Request a book based on ISBN13");
+        private static IServiceProvider _serviceProvider;
 
-            string isbn = req.Query["isbn"];
+        static BooksLib()
+        {
+            _serviceProvider = Bootstrap.ConfigureServices();
+        }
+
+        [FunctionName("Books")]
+        public static IActionResult Get(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Books({isbn})")]HttpRequest req, 
+            ILogger log, string isbn)
+        {
+            log.LogInformation("Request a book based on ISBN13");
 
             if (isbn == null)
                 return new BadRequestObjectResult("Please pass ISBN number on the query string.");
 
-            var book = serviceProvider.GetService<IBookSearchService>().SearchIsbn(isbn);
+            var book = _serviceProvider.GetService<IBookSearchService>().SearchIsbn(isbn);
             return new OkObjectResult(book) as ActionResult;
         }
     }
