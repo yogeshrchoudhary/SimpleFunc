@@ -1,17 +1,16 @@
-﻿using BookLib.Domain;
-using BookLib.Domain.Services;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using Microsoft.Azure.WebJobs;
+using Willezone.Azure.WebJobs.Extensions.DependencyInjection;
 
+[assembly: Microsoft.Azure.WebJobs.Hosting.WebJobsStartup(typeof(BookLibFunc.Microservice.Bootstrap))]
 namespace BookLibFunc.Microservice
 {
-    internal static class Bootstrap
+    internal class Bootstrap : Microsoft.Azure.WebJobs.Hosting.IWebJobsStartup
     {
-        public static IServiceProvider ConfigureServices()
+        public void Configure(IWebJobsBuilder builder)
         {
-            var services = new ServiceCollection();
-            DependencyResolver.Resolve(services);
-            return services.BuildServiceProvider();
+            builder.AddDependencyInjection((services) => {
+                BookLib.Domain.DependencyResolver.Resolve(services);
+            });
         }
     }
 }

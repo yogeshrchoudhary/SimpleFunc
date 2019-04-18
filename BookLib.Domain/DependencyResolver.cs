@@ -6,7 +6,7 @@ namespace BookLib.Domain
 {
     public static class DependencyResolver
     {
-        public static void Resolve(ServiceCollection services)
+        public static void Resolve(IServiceCollection services)
         {
             services.AddTransient<IBookSearchService, BookSearchService>();
         }

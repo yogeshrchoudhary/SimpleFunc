@@ -1,9 +1,10 @@
 ﻿using BookLib.Domain.DomainObjects;
+using System.Threading.Tasks;
 
 namespace BookLib.Domain.Services
 {
     public interface IBookSearchService
     {
-        Book SearchIsbn(string isbn);
+        Task<Book> SearchIsbn(string isbn);
     }
 }
