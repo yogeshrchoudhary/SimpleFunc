@@ -11,7 +11,7 @@ namespace BookLibFunc.Microservice
         {
             var services = new ServiceCollection();
             DependencyResolver.Resolve(services);
-            return null;
+            return services.BuildServiceProvider();
         }
     }
 }
